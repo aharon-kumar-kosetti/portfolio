@@ -8,7 +8,7 @@ import {
 } from "framer-motion"
 import { MapPin, Sparkles, Trophy } from "lucide-react"
 import type { MouseEvent } from "react"
-import { profile } from "../data"
+import { useData } from "../context/DataContext"
 import Marquee from "./Marquee"
 import { GitHubIcon } from "./social-icons"
 import { GhostButton, PillButton } from "./ui"
@@ -58,6 +58,7 @@ function FloatCard({
 }
 
 export default function Hero() {
+  const { profile } = useData()
   const mx = useMotionValue(0.5)
   const my = useMotionValue(0.35)
   const sx = useSpring(mx, { stiffness: 50, damping: 22 })

@@ -1,5 +1,5 @@
 import { Award, Code2, Trophy } from "lucide-react"
-import { profile } from "../data"
+import { useData } from "../context/DataContext"
 import { Reveal, SectionHeading } from "./ui"
 
 const stats = [
@@ -9,6 +9,7 @@ const stats = [
 ]
 
 export default function About() {
+  const { profile } = useData()
   return (
     <section id="about" className="border-t border-line bg-warm/40">
       <div className="mx-auto max-w-6xl px-6 py-28">

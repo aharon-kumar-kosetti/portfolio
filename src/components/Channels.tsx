@@ -1,6 +1,6 @@
 import { ArrowUpRight } from "lucide-react"
 import { useEffect, useState } from "react"
-import { profile } from "../data"
+import { useData } from "../context/DataContext"
 import { fetchGithubCommits, fetchInstagramFollowers, fetchYoutubeViews } from "../lib/stats"
 import { GitHubIcon, InstagramIcon, LinkedInIcon, YouTubeIcon } from "./social-icons"
 import { Reveal, SectionHeading } from "./ui"
@@ -59,6 +59,7 @@ function LiveDot({ on }: { on: boolean }) {
 }
 
 export default function Channels() {
+  const { profile } = useData()
   const stats = useLiveStats()
 
   const channels = [

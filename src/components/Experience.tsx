@@ -1,8 +1,9 @@
 import { Briefcase, GraduationCap } from "lucide-react"
-import { experience } from "../data"
+import { useData } from "../context/DataContext"
 import { Reveal, SectionHeading } from "./ui"
 
 export default function Experience() {
+  const { experience } = useData()
   return (
     <section id="experience" className="border-t border-line bg-warm/40">
       <div className="mx-auto max-w-6xl px-6 py-28">
@@ -33,7 +34,7 @@ export default function Experience() {
                     {e.company}
                   </div>
                   <ul className="mt-4 space-y-2 text-muted">
-                    {e.points.map((pt) => (
+                    {e.points.map((pt: string) => (
                       <li key={pt} className="flex gap-2 text-sm leading-relaxed">
                         <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-warm-deep" />
                         {pt}

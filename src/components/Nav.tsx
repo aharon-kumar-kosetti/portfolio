@@ -1,9 +1,10 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import { useEffect, useState } from "react"
-import { nav, profile } from "../data"
+import { useData } from "../context/DataContext"
 
 export default function Nav() {
+  const { nav, profile } = useData()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 

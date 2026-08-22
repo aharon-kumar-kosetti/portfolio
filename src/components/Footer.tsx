@@ -1,15 +1,17 @@
-import { profile } from "../data"
+import { useData } from "../context/DataContext"
 import { GitHubIcon, InstagramIcon, LeetCodeIcon, LinkedInIcon, YouTubeIcon } from "./social-icons"
 
-const socials = [
-  { label: "GitHub", href: profile.github, Icon: GitHubIcon, color: "text-fg" },
-  { label: "LinkedIn", href: profile.linkedin, Icon: LinkedInIcon, color: "text-[#0a66c2]" },
-  { label: "Instagram", href: profile.instagram, Icon: InstagramIcon, color: "text-[#c13584]" },
-  { label: "YouTube", href: profile.youtube, Icon: YouTubeIcon, color: "text-[#ff0000]" },
-  { label: "LeetCode", href: profile.leetcode, Icon: LeetCodeIcon, color: "text-fg" },
-]
-
 export default function Footer() {
+  const { profile } = useData()
+
+  const socials = [
+    { label: "GitHub", href: profile.github, Icon: GitHubIcon, color: "text-fg" },
+    { label: "LinkedIn", href: profile.linkedin, Icon: LinkedInIcon, color: "text-[#0a66c2]" },
+    { label: "Instagram", href: profile.instagram, Icon: InstagramIcon, color: "text-[#c13584]" },
+    { label: "YouTube", href: profile.youtube, Icon: YouTubeIcon, color: "text-[#ff0000]" },
+    { label: "LeetCode", href: profile.leetcode, Icon: LeetCodeIcon, color: "text-fg" },
+  ]
+
   return (
     <footer className="border-t border-line bg-warm/40">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-6 py-10">

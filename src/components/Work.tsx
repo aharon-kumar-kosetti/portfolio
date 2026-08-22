@@ -1,10 +1,10 @@
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion"
 import { ArrowUpRight, GitFork, Star } from "lucide-react"
 import type { MouseEvent } from "react"
-import { projects } from "../data"
+import { useData } from "../context/DataContext"
 import { Reveal, SectionHeading, Tag } from "./ui"
 
-function ProjectCard({ p, i }: { p: (typeof projects)[number]; i: number }) {
+function ProjectCard({ p, i }: { p: any; i: number }) {
   const mx = useMotionValue(-300)
   const my = useMotionValue(-300)
   const bg = useMotionTemplate`radial-gradient(360px circle at ${mx}px ${my}px, rgba(201,188,174,0.22), transparent 70%)`
@@ -58,9 +58,9 @@ function ProjectCard({ p, i }: { p: (typeof projects)[number]; i: number }) {
 
         <p className="relative mt-4 text-[15px] leading-relaxed text-muted">{p.description}</p>
 
-        {p.points.length > 0 && (
+        {p.points && p.points.length > 0 && (
           <ul className="relative mt-4 space-y-2 text-sm text-muted">
-            {p.points.map((pt) => (
+            {p.points.map((pt: string) => (
               <li key={pt} className="flex gap-2">
                 <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-warm-deep" />
                 {pt}
@@ -71,7 +71,7 @@ function ProjectCard({ p, i }: { p: (typeof projects)[number]; i: number }) {
 
         <div className="relative mt-auto pt-6">
           <div className="flex flex-wrap gap-2">
-            {p.stack.map((s) => (
+            {p.stack.map((s: string) => (
               <Tag key={s}>{s}</Tag>
             ))}
           </div>
@@ -102,6 +102,7 @@ function ProjectCard({ p, i }: { p: (typeof projects)[number]; i: number }) {
 }
 
 export default function Work() {
+  const { projects } = useData()
   const featured = projects.filter((p) => p.featured)
   const rest = projects.filter((p) => !p.featured)
   return (

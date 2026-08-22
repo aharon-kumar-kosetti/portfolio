@@ -1,7 +1,8 @@
-import { skills } from "../data"
+import { useData } from "../context/DataContext"
 import { Reveal, SectionHeading, Tag } from "./ui"
 
 export default function Stack() {
+  const { skills } = useData()
   return (
     <section id="stack" className="mx-auto max-w-6xl px-6 py-28">
       <SectionHeading
@@ -18,7 +19,7 @@ export default function Stack() {
                 <span className="font-mono text-xs text-warm-deep">0{i + 1}</span>
               </div>
               <div className="flex flex-wrap gap-2">
-                {items.map((s) => (
+                {(items as string[]).map((s: string) => (
                   <Tag key={s}>{s}</Tag>
                 ))}
               </div>

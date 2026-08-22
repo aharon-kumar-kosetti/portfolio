@@ -1,20 +1,21 @@
 import { ArrowUpRight, Check, Copy } from "lucide-react"
 import { useState } from "react"
-import { profile } from "../data"
+import { useData } from "../context/DataContext"
 import { GitHubIcon, InstagramIcon, LeetCodeIcon, LinkedInIcon, YouTubeIcon } from "./social-icons"
 import { Eyebrow, PillButton, Reveal } from "./ui"
 
-const links = [
-  { label: "GitHub", href: profile.github, handle: "@aharon-kumar-kosetti", Icon: GitHubIcon, color: "text-fg" },
-  { label: "LinkedIn", href: profile.linkedin, handle: "in/aharon-kumar-kosetti", Icon: LinkedInIcon, color: "text-[#0a66c2]" },
-  { label: "Instagram", href: profile.instagram, handle: "@theaharonkosetti", Icon: InstagramIcon, color: "text-[#c13584]" },
-  { label: "YouTube", href: profile.youtube, handle: "@AharonKosetti", Icon: YouTubeIcon, color: "text-[#ff0000]" },
-  { label: "LeetCode", href: profile.leetcode, handle: "aharonkosetti", Icon: LeetCodeIcon, color: "text-fg" },
-  { label: "Résumé", href: profile.resume, handle: "Aharon Kosetti Resume.pdf", Icon: null, color: "" },
-]
-
 export default function Contact() {
+  const { profile } = useData()
   const [copied, setCopied] = useState(false)
+
+  const links = [
+    { label: "GitHub", href: profile.github, handle: "@aharon-kumar-kosetti", Icon: GitHubIcon, color: "text-fg" },
+    { label: "LinkedIn", href: profile.linkedin, handle: "in/aharon-kumar-kosetti", Icon: LinkedInIcon, color: "text-[#0a66c2]" },
+    { label: "Instagram", href: profile.instagram, handle: "@theaharonkosetti", Icon: InstagramIcon, color: "text-[#c13584]" },
+    { label: "YouTube", href: profile.youtube, handle: "@AharonKosetti", Icon: YouTubeIcon, color: "text-[#ff0000]" },
+    { label: "LeetCode", href: profile.leetcode, handle: "aharonkosetti", Icon: LeetCodeIcon, color: "text-fg" },
+    { label: "Résumé", href: profile.resume, handle: "Aharon Kosetti Resume.pdf", Icon: null, color: "" },
+  ]
 
   const copyEmail = async () => {
     await navigator.clipboard.writeText(profile.email)
