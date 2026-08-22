@@ -14,8 +14,10 @@ const Login = () => {
     setLoading(true);
     setError(null);
 
-    // Map username to a dummy email for Supabase Auth
-    const email = username === 'ironman' ? 'ironman@portfolio.com' : `${username}@portfolio.com`;
+    // Map username to a dummy email for Supabase Auth, or use it directly if it's already an email
+    const email = username.includes('@') 
+      ? username 
+      : (username === 'ironman' ? 'ironman@portfolio.com' : `${username}@portfolio.com`);
 
     const { error } = await supabase.auth.signInWithPassword({
       email,
