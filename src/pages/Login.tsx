@@ -31,41 +31,57 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-base text-fg px-4">
-      <div className="max-w-md w-full bg-base/50 border border-white/10 p-8 rounded-xl backdrop-blur-sm">
-        <h2 className="text-2xl font-bold mb-6 text-center text-primary">Admin Login</h2>
-        {error && <div className="bg-red-500/10 text-red-500 p-3 rounded mb-4 text-sm">{error}</div>}
-        <form onSubmit={handleLogin} className="space-y-4">
+    <div className="min-h-screen flex items-center justify-center bg-base text-fg px-6 py-28 relative overflow-hidden">
+      <div className="dotgrid absolute inset-0 opacity-60" aria-hidden />
+      
+      <div className="relative max-w-md w-full bg-card p-10 rounded-2xl card-shadow-lg transition-all duration-500 hover:card-shadow">
+        <div className="mb-8 text-center">
+          <h2 className="font-display text-3xl font-black tracking-tight">Admin Portal</h2>
+          <p className="mt-2 text-sm text-muted">Sign in to edit your portfolio content.</p>
+        </div>
+
+        {error && (
+          <div className="mb-6 rounded-xl bg-red-500/10 border border-red-500/20 p-4 text-sm text-red-600 font-medium text-center">
+            {error}
+          </div>
+        )}
+
+        <form onSubmit={handleLogin} className="space-y-5">
           <div>
-            <label className="block text-sm font-medium mb-1">Username</label>
+            <label className="block font-display text-sm font-bold mb-2 text-fg">Username</label>
             <input
               type="text"
               required
-              className="w-full bg-white/5 border border-white/10 rounded px-3 py-2 text-white focus:outline-none focus:border-primary"
+              className="w-full bg-surface border border-line rounded-xl px-4 py-3 text-fg focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all card-shadow-none"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              placeholder="ironman"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">Password</label>
+            <label className="block font-display text-sm font-bold mb-2 text-fg">Password</label>
             <input
               type="password"
               required
-              className="w-full bg-white/5 border border-white/10 rounded px-3 py-2 text-white focus:outline-none focus:border-primary"
+              className="w-full bg-surface border border-line rounded-xl px-4 py-3 text-fg focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all card-shadow-none"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
             />
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-primary text-black font-semibold py-2 rounded hover:bg-primary/90 transition-colors disabled:opacity-50"
+            className="mt-2 w-full flex items-center justify-center rounded-xl bg-ink px-5 py-3.5 font-display text-sm font-bold text-white btn-shadow transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-70 disabled:hover:translate-y-0"
           >
-            {loading ? 'Logging in...' : 'Login'}
+            {loading ? 'Authenticating...' : 'Sign in to Dashboard'}
           </button>
         </form>
-        <div className="mt-4 text-center">
-          <a href="/" className="text-sm text-fg/60 hover:text-primary">← Back to Portfolio</a>
+
+        <div className="mt-8 text-center">
+          <a href="/" className="font-mono text-xs text-muted hover:text-accent transition-colors">
+            ← Back to live site
+          </a>
         </div>
       </div>
     </div>
