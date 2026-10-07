@@ -143,7 +143,7 @@ export default function Channels() {
             </span>
           </div>
           <div className="mt-6 text-center">
-            <div className="font-display text-lg font-bold">Aharon Kumar Kosetti</div>
+            <div className="font-display text-lg font-bold">Aharon Kosetti</div>
             <div className="font-mono text-xs text-muted">@theaharonkosetti · everywhere</div>
           </div>
         </Reveal>

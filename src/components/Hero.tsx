@@ -115,7 +115,7 @@ export default function Hero() {
           animate="show"
           className="mt-7 font-display text-[44px] font-black leading-[1.02] tracking-tight text-balance md:text-[76px]"
         >
-          Aharon Kumar Kosetti
+          Aharon Kosetti
         </motion.h1>
 
         <motion.p
