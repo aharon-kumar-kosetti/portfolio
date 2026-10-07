@@ -1,39 +1,30 @@
 import { ArrowUpRight } from "lucide-react"
 import { useEffect, useState } from "react"
 import { useData } from "../context/DataContext"
-import { fetchGithubCommits, fetchInstagramFollowers, fetchYoutubeViews } from "../lib/stats"
+import { fetchSocialStats, type SocialStats } from "../lib/stats"
 import { GitHubIcon, InstagramIcon, LinkedInIcon, YouTubeIcon } from "./social-icons"
 import { Reveal, SectionHeading } from "./ui"
 
-/* Last-known values — shown instantly, replaced by live data as it arrives.
-   Update these by hand when LinkedIn / Instagram can't be reached. */
-const FALLBACK = {
-  commits: 254,
-  ytViews: 917,
-  igFollowers: 83,
+// Current counts supplied by Aharon. Platform API values take precedence when available.
+const CURRENT_COUNTS = {
+  instagramFollowers: 624,
+  youtubeViews: 2353,
 }
 
-type LiveStats = typeof FALLBACK & { live: { commits: boolean; yt: boolean; ig: boolean } }
-
-function useLiveStats(): LiveStats {
-  const [stats, setStats] = useState<LiveStats>({ ...FALLBACK, live: { commits: false, yt: false, ig: false } })
+function useLiveStats(): SocialStats {
+  const [stats, setStats] = useState<SocialStats>({
+    githubFollowers: null,
+    instagramFollowers: null,
+    youtubeViews: null,
+  })
 
   useEffect(() => {
     let alive = true
 
     const load = async () => {
-      const [commits, yt, ig] = await Promise.all([
-        fetchGithubCommits("aharon-kumar-kosetti"),
-        fetchYoutubeViews("@AharonKosetti"),
-        fetchInstagramFollowers("theaharonkosetti"),
-      ])
+      const latest = await fetchSocialStats()
       if (!alive) return
-      setStats((s) => ({
-        commits: commits ?? s.commits,
-        ytViews: yt ?? s.ytViews,
-        igFollowers: ig ?? s.igFollowers,
-        live: { commits: commits != null, yt: yt != null, ig: ig != null },
-      }))
+      setStats(latest ?? { githubFollowers: null, instagramFollowers: null, youtubeViews: null })
     }
 
     load()
@@ -47,13 +38,11 @@ function useLiveStats(): LiveStats {
   return stats
 }
 
-function LiveDot({ on }: { on: boolean }) {
+function LiveDot({ live }: { live: boolean }) {
   return (
     <span
-      title={on ? "Auto-updates live" : "Last known value"}
-      className={`ml-2 inline-block h-2 w-2 rounded-full align-middle ${
-        on ? "bg-emerald-500 shadow-[0_0_6px_2px_rgba(16,185,129,0.5)] animate-pulse" : "bg-warm-deep/60"
-      }`}
+      title={live ? "Live platform count; refreshes about every 5 minutes" : "Manually updated count; configure platform API access for automatic updates"}
+      className={`ml-2 inline-block h-2 w-2 rounded-full align-middle ${live ? "bg-emerald-500" : "bg-warm-deep/60"}`}
     />
   )
 }
@@ -65,9 +54,9 @@ export default function Channels() {
   const channels = [
     {
       name: "GitHub",
-      value: stats.commits.toLocaleString(),
-      label: "Total commits",
-      live: stats.live.commits,
+      value: stats.githubFollowers?.toLocaleString() ?? "—",
+      label: "Followers",
+      available: stats.githubFollowers != null,
       handle: "@aharon-kumar-kosetti",
       href: profile.github,
       icon: GitHubIcon,
@@ -76,9 +65,9 @@ export default function Channels() {
     },
     {
       name: "Instagram",
-      value: stats.igFollowers.toLocaleString(),
+      value: (stats.instagramFollowers ?? CURRENT_COUNTS.instagramFollowers).toLocaleString(),
       label: "Followers",
-      live: stats.live.ig,
+      live: stats.instagramFollowers != null,
       handle: "@theaharonkosetti",
       href: profile.instagram,
       icon: InstagramIcon,
@@ -87,9 +76,9 @@ export default function Channels() {
     },
     {
       name: "YouTube",
-      value: stats.ytViews.toLocaleString(),
+      value: (stats.youtubeViews ?? CURRENT_COUNTS.youtubeViews).toLocaleString(),
       label: "Total views",
-      live: stats.live.yt,
+      live: stats.youtubeViews != null,
       handle: "@AharonKosetti",
       href: profile.youtube,
       icon: YouTubeIcon,
@@ -169,7 +158,7 @@ export default function Channels() {
                 </div>
                 <div className="mt-5 font-display text-xl font-bold tracking-tight text-balance">
                   {c.value}
-                  {c.live !== undefined && c.name !== "LinkedIn" && <LiveDot on={c.live} />}
+                  {c.live !== undefined && <LiveDot live={c.live} />}
                 </div>
                 <div className="mt-0.5 text-sm text-muted">{c.label}</div>
                 <div className="mt-4 border-t border-line pt-3 font-mono text-xs text-muted">
