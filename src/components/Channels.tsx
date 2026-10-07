@@ -131,7 +131,7 @@ export default function Channels() {
               className="float-card animate-float rounded-full bg-card p-1.5 card-shadow-lg"
             >
               <img
-                src={profile.avatar}
+                src="/aharon-kumar-kosetti-portrait.png"
                 alt={profile.name}
                 width={148}
                 height={148}
@@ -147,6 +147,40 @@ export default function Channels() {
             <div className="font-mono text-xs text-muted">@theaharonkosetti · everywhere</div>
           </div>
         </Reveal>
+
+        <div className="mx-auto mb-14 max-w-3xl">
+          <h3 className="mb-4 text-center font-display text-sm font-bold text-muted">
+            Portraits of Aharon Kumar Kosetti
+          </h3>
+          <div className="grid gap-5 sm:grid-cols-2">
+            <Reveal>
+              <figure className="overflow-hidden rounded-2xl bg-card card-shadow">
+                <img
+                  src="/aharon-kumar-kosetti-portrait-4x3.png"
+                  alt="Aharon Kumar Kosetti in a light shirt, seated in a bright indoor setting"
+                  width={1448}
+                  height={1086}
+                  className="aspect-[4/3] w-full object-cover"
+                  loading="lazy"
+                />
+                <figcaption className="px-4 py-3 text-sm text-muted">Aharon Kumar Kosetti</figcaption>
+              </figure>
+            </Reveal>
+            <Reveal delay={0.08}>
+              <figure className="overflow-hidden rounded-2xl bg-card card-shadow">
+                <img
+                  src="/aharon-kumar-kosetti-portrait-wide.png"
+                  alt="Aharon Kumar Kosetti wearing glasses and a dark shirt in a warm, modern interior"
+                  width={1730}
+                  height={909}
+                  className="aspect-[4/3] w-full object-cover"
+                  loading="lazy"
+                />
+                <figcaption className="px-4 py-3 text-sm text-muted">Aharon Kumar Kosetti</figcaption>
+              </figure>
+            </Reveal>
+          </div>
+        </div>
 
         {/* Channel stat cards */}
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">

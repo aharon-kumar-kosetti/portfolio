@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://aharonkosetti.vercel.app/</loc>
+    <image:image>
+      <image:loc>https://aharonkosetti.vercel.app/aharon-kumar-kosetti-portrait.png</image:loc>
+      <image:title>Aharon Kumar Kosetti portrait</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://aharonkosetti.vercel.app/aharon-kumar-kosetti-portrait-4x3.png</image:loc>
+      <image:title>Aharon Kumar Kosetti portrait, 4:3</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://aharonkosetti.vercel.app/aharon-kumar-kosetti-portrait-wide.png</image:loc>
+      <image:title>Aharon Kumar Kosetti portrait, wide</image:title>
+    </image:image>
+  </url>
+</urlset>
