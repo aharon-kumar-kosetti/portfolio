@@ -20,6 +20,16 @@ export default function About() {
         <div className="grid gap-14 md:grid-cols-[1.2fr_1fr]">
           <Reveal>
             <div className="space-y-5 rounded-2xl bg-card p-8 text-[15px] leading-relaxed text-muted card-shadow">
+              <figure className="-mx-8 -mt-8 mb-7 overflow-hidden rounded-t-2xl">
+                <img
+                  src="/aharon-kumar-kosetti-portrait-wide.png"
+                  alt="Aharon Kumar Kosetti wearing glasses and a dark shirt in a warm, modern interior"
+                  width={1730}
+                  height={909}
+                  className="aspect-[16/9] w-full object-cover object-[50%_42%]"
+                  loading="lazy"
+                />
+              </figure>
               <p>
                 I'm a Computer Science &amp; Design undergraduate at{" "}
                 <span className="font-semibold text-fg">SRKR Engineering College</span> and a
